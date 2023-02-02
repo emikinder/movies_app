@@ -47,6 +47,8 @@ class MovieSearchDelegate extends SearchDelegate {
       return _emptyContainer();
     }
 
+    print('http request');
+
     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
 
     return FutureBuilder(
@@ -71,11 +73,15 @@ class _MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    movie.heroId = 'search-${movie.id}';
     return ListTile(
-      leading: FadeInImage(
-        placeholder: const AssetImage('lib/assets/no-image.jpg'),
-        image: NetworkImage(movie.fullPosterImg),
-        fit: BoxFit.cover
+      leading: Hero(
+        tag: movie.heroId!,
+        child: FadeInImage(
+          placeholder: const AssetImage('lib/assets/no-image.jpg'),
+          image: NetworkImage(movie.fullPosterImg),
+          fit: BoxFit.cover
+        ),
       ),
       title: Text(movie.title),
       subtitle: Text(movie.originalTitle),
