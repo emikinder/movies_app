@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class Result {
-  Result({
+class Movie {
+  Movie({
     required this.adult,
     this.backdropPath,
     required this.genreIds,
@@ -33,9 +33,21 @@ class Result {
   double voteAverage;
   int voteCount;
 
-  factory Result.fromJson(String str) => Result.fromMap(json.decode(str));
+  get fullPosterImg {
+    return posterPath != null
+        ? 'https://image.tmdb.org/t/p/w500$posterPath'
+        : 'https://i.stack.imgur.com/GNhxO.png';
+  }
 
-  factory Result.fromMap(Map<String, dynamic> json) => Result(
+  get fullBackdropPath {
+    return backdropPath != null
+        ? 'https://image.tmdb.org/t/p/w500$backdropPath'
+        : 'https://i.stack.imgur.com/GNhxO.png';
+  }
+
+  factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
+
+  factory Movie.fromMap(Map<String, dynamic> json) => Movie(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),

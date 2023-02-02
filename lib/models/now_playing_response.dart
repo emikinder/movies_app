@@ -17,7 +17,7 @@ class NowPlayingResponse {
 
   Dates dates;
   int page;
-  List<Result> results;
+  List<Movie> results;
   int totalPages;
   int totalResults;
 
@@ -29,7 +29,7 @@ class NowPlayingResponse {
         dates: Dates.fromMap(json["dates"]),
         page: json["page"],
         results:
-            List<Result>.from(json["results"].map((x) => Result.fromMap(x))),
+            List<Movie>.from(json["results"].map((x) => Movie.fromMap(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
